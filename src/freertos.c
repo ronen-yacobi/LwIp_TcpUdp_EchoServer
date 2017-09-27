@@ -47,6 +47,7 @@
   */
 
 /* Includes ------------------------------------------------------------------*/
+#include "BlinkLed.h"
 #include "FreeRTOS.h"
 #include "task.h"
 #include "cmsis_os.h"
@@ -118,10 +119,17 @@ void StartDefaultTask(void const * argument)
   MX_LWIP_Init();
 
   /* USER CODE BEGIN StartDefaultTask */
+  // Perform all necessary initialisations for the LEDs.
+
+
+
   /* Infinite loop */
   for(;;)
   {
-    osDelay(1);
+  	turnOn(0);
+    osDelay(1000);
+  	turnOff(0);
+    osDelay(1000);
   }
   /* USER CODE END StartDefaultTask */
 }
