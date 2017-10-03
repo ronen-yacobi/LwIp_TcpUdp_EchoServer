@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>LwIP_HTTP_Server_Netconn_RTOS</name>
+	<name>LwIp_TcpUdp_EchoServer</name>
 	<comment></comment>
 	<projects>
 	</projects>

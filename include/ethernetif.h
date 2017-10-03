@@ -1,17 +1,15 @@
 /**
- ******************************************************************************
-  * File Name          : ethernetif.h
-  * Description        : This file provides initialization code for LWIP
-  *                      middleWare.
   ******************************************************************************
-  * This notice applies to any and all portions of this file
-  * that are not between comment pairs USER CODE BEGIN and
-  * USER CODE END. Other portions of this file, whether 
-  * inserted by the user or by software development tools
-  * are owned by their respective copyright owners.
+  * @file    ethernetif.h
+  * @author  MCD Application Team
+  * @version V1.4.0
+  * @date    17-February-2017
+  * @brief   Ethernet interface header file.
+  ******************************************************************************
+  * @attention
   *
-  * Copyright (c) 2017 STMicroelectronics International N.V. 
-  * All rights reserved.
+  * <h2><center>&copy; Copyright (c) 2016 STMicroelectronics International N.V. 
+  * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
   * modification, are permitted, provided that the following conditions are met:
@@ -46,30 +44,24 @@
   *
   ******************************************************************************
   */
-  
 
 #ifndef __ETHERNETIF_H__
 #define __ETHERNETIF_H__
+
 
 #include "lwip/err.h"
 #include "lwip/netif.h"
 #include "cmsis_os.h"
 
-/* Within 'USER CODE' section, code will be kept by default at each generation */
-/* USER CODE BEGIN 0 */
-
-/* USER CODE END 0 */
-
+/* Exported types ------------------------------------------------------------*/
+/* Structure that include link thread parameters */
+   struct link_str {
+  struct netif *netif;
+  osSemaphoreId semaphore;
+};
 /* Exported functions ------------------------------------------------------- */
-err_t ethernetif_init(struct netif *netif);
-
-void ethernetif_input( void const * argument );
+err_t ethernetif_init(struct netif *netif);      
+void ethernetif_set_link(void const *argument);
 void ethernetif_update_config(struct netif *netif);
 void ethernetif_notify_conn_changed(struct netif *netif);
-
-/* USER CODE BEGIN 1 */
-
-/* USER CODE END 1 */
 #endif
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

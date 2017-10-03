@@ -1,16 +1,15 @@
 /**
   ******************************************************************************
-  * @file   fatfs.c
-  * @brief  Code for fatfs applications
+  * @file    LwIP/LwIP_UDPTCP_Echo_Server_Netconn_RTOS/Inc/app_ethernet.h 
+  * @author  MCD Application Team
+  * @version V1.4.0
+  * @date    17-February-2017
+  * @brief   Header for app_ethernet.c module
   ******************************************************************************
-  * This notice applies to any and all portions of this file
-  * that are not between comment pairs USER CODE BEGIN and
-  * USER CODE END. Other portions of this file, whether 
-  * inserted by the user or by software development tools
-  * are owned by their respective copyright owners.
+  * @attention
   *
-  * Copyright (c) 2017 STMicroelectronics International N.V. 
-  * All rights reserved.
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
+  * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
   * modification, are permitted, provided that the following conditions are met:
@@ -45,42 +44,40 @@
   *
   ******************************************************************************
   */
+/* Define to prevent recursive inclusion -------------------------------------*/
+#ifndef __APP_ETHERNET_H
+#define __APP_ETHERNET_H
 
-#include "fatfs.h"
+#ifdef __cplusplus
+ extern "C" {
+#endif
 
-uint8_t retUSER;    /* Return value for USER */
-char USERPath[4];   /* USER logical drive path */
-FATFS USERFatFS;    /* File system object for USER logical drive */
-FIL USERFile;       /* File object for USER */
+/* Includes ------------------------------------------------------------------*/
+#include "lwip/netif.h"
 
-/* USER CODE BEGIN Variables */
+/* Exported types ------------------------------------------------------------*/
+/* Exported constants --------------------------------------------------------*/   
+/* DHCP process states */
+#define DHCP_OFF                   (uint8_t) 0
+#define DHCP_START                 (uint8_t) 1
+#define DHCP_WAIT_ADDRESS          (uint8_t) 2
+#define DHCP_ADDRESS_ASSIGNED      (uint8_t) 3
+#define DHCP_TIMEOUT               (uint8_t) 4
+#define DHCP_LINK_DOWN             (uint8_t) 5
+   
+/* Exported macro ------------------------------------------------------------*/
+/* Exported functions ------------------------------------------------------- */
+void User_notification(struct netif *netif);
+#ifdef USE_DHCP
+void DHCP_thread(void const * argument);
+#endif
 
-/* USER CODE END Variables */    
-
-void MX_FATFS_Init(void) 
-{
-  /*## FatFS: Link the USER driver ###########################*/
-  retUSER = FATFS_LinkDriver(&USER_Driver, USERPath);
-
-  /* USER CODE BEGIN Init */
-  /* additional user code for init */     
-  /* USER CODE END Init */
+#ifdef __cplusplus
 }
+#endif
 
-/**
-  * @brief  Gets Time from RTC 
-  * @param  None
-  * @retval Time in DWORD
-  */
-DWORD get_fattime(void)
-{
-  /* USER CODE BEGIN get_fattime */
-  return 0;
-  /* USER CODE END get_fattime */  
-}
+#endif /* __APP_ETHERNET_H */
 
-/* USER CODE BEGIN Application */
-     
-/* USER CODE END Application */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+

@@ -1,17 +1,15 @@
 /**
- ******************************************************************************
-  * @file    user_diskio.h
-  * @brief   This file contains the common defines and functions prototypes for  
-  *          the user_diskio driver.
   ******************************************************************************
-  * This notice applies to any and all portions of this file
-  * that are not between comment pairs USER CODE BEGIN and
-  * USER CODE END. Other portions of this file, whether 
-  * inserted by the user or by software development tools
-  * are owned by their respective copyright owners.
+  * @file    LwIP/LwIP_HTTP_Server_Netconn_RTOS/Inc/lcd_log_conf.h
+  * @author  MCD Application Team
+  * @version V1.4.0
+  * @date    17-February-2017
+  * @brief   LCD Log configuration file.
+  ******************************************************************************
+  * @attention
   *
-  * Copyright (c) 2017 STMicroelectronics International N.V. 
-  * All rights reserved.
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
+  * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
   * modification, are permitted, provided that the following conditions are met:
@@ -46,29 +44,106 @@
   *
   ******************************************************************************
   */
-  
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __USER_DISKIO_H
-#define __USER_DISKIO_H
 
-#ifdef __cplusplus
- extern "C" {
-#endif 
-
-/* USER CODE BEGIN 0 */
+#ifndef  __LCD_LOG_CONF_H
+#define  __LCD_LOG_CONF_H
 
 /* Includes ------------------------------------------------------------------*/
-/* Exported types ------------------------------------------------------------*/
-/* Exported constants --------------------------------------------------------*/
-/* Exported functions ------------------------------------------------------- */
-extern Diskio_drvTypeDef  USER_Driver;
+#include "stm324xg_eval_lcd.h" 
+#include <stdio.h>
 
-/* USER CODE END 0 */
-   
-#ifdef __cplusplus
-}
+
+/** @addtogroup LCD_LOG
+  * @{
+  */
+  
+/** @defgroup LCD_LOG
+  * @brief This file is the 
+  * @{
+  */ 
+
+
+/** @defgroup LCD_LOG_CONF_Exported_Defines
+  * @{
+  */ 
+
+/* Comment the line below to disable the scroll back and forward features */
+#define     LCD_SCROLL_ENABLED      1 
+
+/* Define the Fonts  */
+#define     LCD_LOG_HEADER_FONT                   Font16
+#define     LCD_LOG_FOOTER_FONT                   Font12
+#define     LCD_LOG_TEXT_FONT                     Font12
+            
+/* Define the LCD LOG Color  */
+#define     LCD_LOG_BACKGROUND_COLOR              LCD_COLOR_WHITE
+#define     LCD_LOG_TEXT_COLOR                    LCD_COLOR_DARKBLUE
+#define     LCD_LOG_DEFAULT_COLOR                 LCD_COLOR_DARKBLUE
+
+#define     LCD_LOG_SOLID_BACKGROUND_COLOR        LCD_COLOR_BLUE
+#define     LCD_LOG_SOLID_TEXT_COLOR              LCD_COLOR_WHITE
+
+/* Define the cache depth */
+#define     CACHE_SIZE              100
+#define     YWINDOW_SIZE            17
+
+#if (YWINDOW_SIZE > 17)
+  #error "Wrong YWINDOW SIZE"
 #endif
 
-#endif /* __USER_DISKIO_H */
+/* Redirect the printf to the LCD */
+#ifdef __GNUC__
+/* With GCC, small printf (option LD Linker->Libraries->Small printf
+   set to 'Yes') calls __io_putchar() */
+#define LCD_LOG_PUTCHAR int __io_putchar(int ch)
+#else
+#define LCD_LOG_PUTCHAR int fputc(int ch, FILE *f)
+#endif /* __GNUC__ */
+
+/** @defgroup LCD_LOG_CONF_Exported_TypesDefinitions
+  * @{
+  */ 
+
+/**
+  * @}
+  */ 
+
+
+/** @defgroup LCD_LOG_Exported_Macros
+  * @{
+  */ 
+
+
+/**
+  * @}
+  */ 
+
+/** @defgroup LCD_LOG_CONF_Exported_Variables
+  * @{
+  */ 
+
+/**
+  * @}
+  */ 
+
+/** @defgroup LCD_LOG_CONF_Exported_FunctionsPrototype
+  * @{
+  */ 
+
+/**
+  * @}
+  */ 
+
+
+#endif /* __LCD_LOG_CONF_H */
+
+/**
+  * @}
+  */ 
+
+/**
+  * @}
+  */ 
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
