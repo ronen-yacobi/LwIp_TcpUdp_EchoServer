@@ -47,6 +47,19 @@
 #ifndef __LWIPOPTS_H__
 #define __LWIPOPTS_H__
 
+#include "stm32f4xx_hal.h"
+#ifdef __cplusplus
+ extern "C" {
+#endif
+
+/* STM32CubeMX Specific Parameters (not defined in opt.h) ---------------------*/
+/* Parameters set in STM32CubeMX LwIP Configuration GUI -*/
+/*----- WITH_RTOS enabled (Since FREERTOS is set) -----*/
+#define WITH_RTOS 1
+/*----- CHECKSUM_BY_HARDWARE disabled -----*/
+#define CHECKSUM_BY_HARDWARE 0
+/*-----------------------------------------------------------------------------*/
+
 /**
  * NO_SYS==1: Provides VERY minimal functionality. Otherwise,
  * use lwIP facilities.

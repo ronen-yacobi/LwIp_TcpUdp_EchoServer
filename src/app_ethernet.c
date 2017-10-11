@@ -60,7 +60,7 @@
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 #ifdef USE_DHCP
-#define MAX_DHCP_TRIES  4
+#define MAX_DHCP_TRIES  99
 __IO uint8_t DHCP_state = DHCP_OFF;
 #endif
 

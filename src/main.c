@@ -74,11 +74,12 @@ struct link_str link_arg;
 static void SystemClock_Config(void);
 static void StartThread(void const * argument);
 static void ToggleLed1(void const * argument);
-static void BSP_Config(void);
+extern void MX_FREERTOS_Init(void);
+extern void MX_LWIP_Init(void);
+extern void MX_GPIO_Init(void);
 static void Netif_Config(void);
 extern void tcpecho_init(void);
 extern void udpecho_init(void);
-extern void MX_LWIP_Init(void);
 
 /* Private functions ---------------------------------------------------------*/
 
@@ -100,8 +101,11 @@ int main(void)
   /* Configure the system clock to 168 MHz */
   SystemClock_Config();
 
+
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+
+  /* Call init function for freertos objects (in freertos.c) */
 
   /* Init task */
 #if defined(__GNUC__)
@@ -125,13 +129,12 @@ int main(void)
   */
 static void StartThread(void const * argument)
 {
-  /* Create tcp_ip stack thread */
-  tcpip_init(NULL, NULL);
-  
-  /* Initialize the LwIP stack */
-  //Netif_Config();
+  /* Initialize the LwIP stack, inits also tcpip stack*/
   MX_LWIP_Init();
+
+  Netif_Config();
   
+  /* Network interface configuration */
   /* Initialize tcp echo server */
   tcpecho_init();
 
@@ -237,7 +240,7 @@ static void ToggleLed1(void const * argument)
   {
     /* Toggle LED4 each 250ms */
     BSP_LED_Toggle(LED1);
-    osDelay(250);
+    osDelay(1000);
   }
 }
 
