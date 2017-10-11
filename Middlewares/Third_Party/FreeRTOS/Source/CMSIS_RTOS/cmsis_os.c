@@ -1407,7 +1407,7 @@ osStatus osMailFree (osMailQId queue_id, void *mail)
 */
 void osSystickHandler(void)
 {
-
+	HAL_IncTick();
 #if (INCLUDE_xTaskGetSchedulerState  == 1 )
   if (xTaskGetSchedulerState() != taskSCHEDULER_NOT_STARTED)
   {

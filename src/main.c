@@ -73,7 +73,7 @@ struct link_str link_arg;
 /* Private function prototypes -----------------------------------------------*/
 static void SystemClock_Config(void);
 static void StartThread(void const * argument);
-static void ToggleLed1(void const * argument);
+static void ToggleLed2(void const * argument);
 extern void MX_FREERTOS_Init(void);
 extern void MX_LWIP_Init(void);
 extern void MX_GPIO_Init(void);
@@ -132,7 +132,7 @@ static void StartThread(void const * argument)
   /* Initialize the LwIP stack, inits also tcpip stack*/
   MX_LWIP_Init();
 
-  Netif_Config();
+  //Netif_Config();
   
   /* Network interface configuration */
   /* Initialize tcp echo server */
@@ -151,8 +151,8 @@ static void StartThread(void const * argument)
 #endif
   
   /* Start toogleLed4 task : Toggle LED4  every 250ms */
-  osThreadDef(LED1, ToggleLed1, osPriorityLow, 0, configMINIMAL_STACK_SIZE);
-  osThreadCreate(osThread(LED1), NULL);
+  osThreadDef(LED2, ToggleLed2, osPriorityLow, 0, configMINIMAL_STACK_SIZE);
+  osThreadCreate(osThread(LED2), NULL);
   
   for( ;; )
   {
@@ -234,12 +234,12 @@ static void Netif_Config(void)
   * @param  pvParameters not used
   * @retval None
   */
-static void ToggleLed1(void const * argument)
+static void ToggleLed2(void const * argument)
 {
   for( ;; )
   {
     /* Toggle LED4 each 250ms */
-    BSP_LED_Toggle(LED1);
+    BSP_LED_Toggle(LED2);
     osDelay(1000);
   }
 }
